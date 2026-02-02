@@ -168,7 +168,7 @@ function openQuestion(catIndex, qIndex) {
     document.getElementById('question-points-display').textContent = q.points;
     document.getElementById('question-text').textContent = q.q;
     
-    // Ответ пока скрыт, но мы загружаем текст (критерии)
+    // Ответ пока скрыт
     document.getElementById('answer-text').textContent = q.a;
     
     document.getElementById('answer-block').classList.add('hidden');
@@ -177,7 +177,6 @@ function openQuestion(catIndex, qIndex) {
     modal.style.display = 'block';
 }
 
-// --- ИЗМЕНЕННАЯ ЛОГИКА КНОПКИ "ПОСМОТРЕТЬ ОТВЕТ" ---
 document.getElementById('btn-show-answer').addEventListener('click', () => {
     document.getElementById('btn-show-answer').classList.add('hidden');
     document.getElementById('answer-block').classList.remove('hidden');
@@ -185,15 +184,13 @@ document.getElementById('btn-show-answer').addEventListener('click', () => {
     const header = document.getElementById('answer-header');
     const prompt = document.getElementById('scoring-prompt');
 
-    // Если это творческое задание (100 баллов)
     if (currentQuestion.points === 100) {
-        header.style.display = 'none'; // Скрываем "Правильный ответ"
-        prompt.textContent = "КТО СПРАВИЛСЯ ЛУЧШЕ?"; // Меняем текст вопроса
-        prompt.style.fontSize = "2rem"; // Делаем крупнее
-        prompt.style.color = "var(--gold)"; // Золотой цвет
+        header.style.display = 'none'; 
+        prompt.textContent = "КТО СПРАВИЛСЯ ЛУЧШЕ?"; 
+        prompt.style.fontSize = "2rem"; 
+        prompt.style.color = "var(--gold)"; 
         prompt.style.fontWeight = "bold";
     } else {
-        // Сброс стилей для обычных вопросов
         header.style.display = 'block';
         prompt.textContent = "Кто ответил верно?";
         prompt.style.fontSize = "1rem";
@@ -236,31 +233,53 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-// --- ЛОГИКА ЗАВЕРШЕНИЯ ИГРЫ ---
+// --- НОВАЯ ЛОГИКА ЗАВЕРШЕНИЯ ИГРЫ ---
 document.getElementById('btn-finish-game').addEventListener('click', finishGame);
 
 function finishGame() {
     switchScreen(screenSummary);
+    
+    // Сортировка команд по очкам (от большего к меньшему)
     const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
     
     if (sortedTeams.length > 0) {
-        const winner = sortedTeams[0];
-        document.getElementById('winner-name').textContent = winner.name;
-        document.getElementById('winner-score').textContent = `${winner.score} очков`;
+        // Находим максимальный балл
+        const maxScore = sortedTeams[0].score;
+        
+        // Находим ВСЕХ, у кого этот максимальный балл
+        const winners = sortedTeams.filter(t => t.score === maxScore);
+        
+        // Формируем строку с именами победителей
+        const winnerNames = winners.map(w => w.name).join(' и ');
+        
+        document.getElementById('winner-name').textContent = winnerNames;
+        document.getElementById('winner-score').textContent = `${maxScore} очков`;
     }
 
+    // Таблица результатов с логикой "одинаковые очки = одинаковое место"
     const resultsContainer = document.getElementById('final-results-table');
     resultsContainer.innerHTML = '';
 
-    sortedTeams.forEach((team, index) => {
+    let currentRank = 0;
+    let lastScore = -1;
+
+    sortedTeams.forEach((team) => {
+        // Если очки отличаются от предыдущего, увеличиваем счетчик мест
+        // Если очки такие же, место остается прежним
+        if (team.score !== lastScore) {
+            currentRank++;
+            lastScore = team.score;
+        }
+
         const row = document.createElement('div');
         row.className = 'result-row';
         
+        // Определяем медальку по НОМЕРУ места
         let medal = '';
-        if (index === 0) medal = '🥇';
-        else if (index === 1) medal = '🥈';
-        else if (index === 2) medal = '🥉';
-        else medal = `${index + 1}.`;
+        if (currentRank === 1) medal = '🥇';
+        else if (currentRank === 2) medal = '🥈';
+        else if (currentRank === 3) medal = '🥉';
+        else medal = `${currentRank}.`;
 
         row.innerHTML = `
             <span>${medal} ${team.name}</span>
