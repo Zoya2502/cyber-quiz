@@ -1,0 +1,322 @@
+:root {
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+    --primary: #00ff9d; /* Неоновый зеленый */
+    --secondary: #58a6ff; /* Голубой */
+    --accent: #ff7b72; /* Красный */
+    --gold: #ffd700;
+    --text: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text);
+    height: 100vh; /* Фиксируем высоту на весь экран */
+    overflow: hidden; /* Запрещаем скролл */
+}
+
+/* УПРАВЛЕНИЕ ЭКРАНАМИ */
+.screen {
+    display: none;
+    height: 100vh; /* Высота экрана 100% */
+    width: 100%;
+    padding: 10px 20px; /* Уменьшили отступы */
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Экран приветствия */
+#start-screen {
+    background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    position: relative;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.glitch-text {
+    font-size: 2.5rem; /* Чуть меньше для компактности */
+    margin: 0 0 15px 0;
+    text-shadow: 2px 2px var(--primary);
+    text-align: center;
+}
+
+/* Кнопки */
+.neon-btn {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 10px 20px; /* Компактнее */
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+
+.neon-btn:hover {
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+/* Красная кнопка завершения */
+.danger-btn {
+    border-color: var(--accent);
+    color: var(--accent);
+    margin-top: 10px; /* Уменьшили отступ сверху */
+    margin-bottom: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+.danger-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent);
+}
+
+/* Настройки */
+.input-group { margin: 20px; text-align: center; }
+input {
+    padding: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--secondary);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+}
+.team-name-input {
+    display: block;
+    margin: 10px auto;
+    width: 300px;
+    text-align: center;
+}
+.hidden { display: none; }
+
+/* --- ИГРОВОЕ ПОЛЕ (FLEX FIX) --- */
+#game-screen {
+    justify-content: space-between; /* Распределяем элементы по высоте */
+    padding-bottom: 15px;
+}
+
+.game-header {
+    width: 100%;
+    flex-shrink: 0; /* Шапка не сжимается */
+}
+
+/* Рейтинг */
+#scoreboard {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    background: var(--card-bg);
+    border-bottom: 2px solid var(--secondary);
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.team-score {
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+}
+
+/* ТАБЛИЦА ВОПРОСОВ (GRID + FLEX) */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+    /* 
+       ИЗМЕНЕНИЕ: repeat(6, 1fr) 
+       теперь 6 строк (10, 20, 30, 40, 50, 100) 
+    */
+    grid-template-rows: auto repeat(6, 1fr); 
+    
+    gap: 10px;
+    max-width: 1200px;
+    width: 100%;
+    
+    flex-grow: 1; 
+    height: 100%; 
+    overflow: hidden; 
+    margin-bottom: 10px;
+}
+
+/* НОВЫЙ СТИЛЬ: для кнопок за 100 баллов */
+.special-btn {
+    border-color: var(--gold) !important;
+    color: var(--gold) !important;
+    font-weight: bold;
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.special-btn:hover {
+    background: var(--gold) !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px var(--gold);
+}
+
+.category-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-bottom: 1px solid var(--secondary);
+}
+
+.question-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    /* Убрали фиксированную высоту 80px! */
+    height: 100%; 
+    width: 100%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.question-btn:hover {
+    background: var(--primary);
+    color: #000;
+}
+
+.question-btn.disabled {
+    background: #1a1a1a;
+    border-color: #333;
+    color: #333;
+    pointer-events: none;
+}
+
+/* --- ИТОГИ --- */
+.winner-box {
+    text-align: center;
+    border: 2px solid var(--gold);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 400px;
+}
+
+.cup-icon { font-size: 3rem; margin-bottom: 5px; }
+#winner-name { font-size: 2rem; color: var(--gold); margin: 5px 0; }
+#winner-score { font-size: 1.2rem; color: #fff; }
+
+.results-list { width: 100%; max-width: 500px; overflow-y: auto; max-height: 30vh;}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: var(--card-bg);
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+/* --- МОДАЛЬНОЕ ОКНО --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    overflow-y: auto; /* Если контент большой */
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 2% auto; /* Чуть выше */
+    padding: 20px;
+    border: 2px solid var(--primary);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--accent);
+}
+
+#question-category-display { color: var(--secondary); font-size: 0.9rem;}
+#question-points-display { font-size: 2rem; color: var(--primary); margin-bottom: 10px;}
+#question-text { font-size: 1.4rem; line-height: 1.4; margin-bottom: 20px; white-space: pre-wrap; }
+
+/* Кнопки выбора команд */
+#team-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.team-select-btn {
+    background: var(--secondary);
+    border: none;
+    color: #000;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 3px;
+}
+.team-select-btn:hover { background: #fff; }
+
+/* Стиль для кнопки "Никто / Пропустить" */
+.cancel-btn {
+    background: var(--accent); /* Красный цвет */
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+    display: inline-block; /* Чтобы она имела размеры */
+}
+
+.cancel-btn:hover {
+    background: #e5534b; /* Чуть светлее при наведении */
+    box-shadow: 0 0 10px var(--accent);
+}
