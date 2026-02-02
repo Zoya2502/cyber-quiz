@@ -300,5 +300,4 @@ document.getElementById('btn-restart').addEventListener('click', () => {
 function switchScreen(targetScreen) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     targetScreen.classList.add('active');
-
 }
