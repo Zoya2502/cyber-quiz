@@ -166,7 +166,7 @@ document.getElementById('btn-show-answer').addEventListener('click', () => {
 
     if (currentQuestion.points === 100) {
         header.style.display = 'none'; 
-        prompt.textContent = "КТО СПРАВИЛСЯ ЛУЧШЕ?"; 
+        prompt.textContent = "Кто ответил правильно?"; 
         prompt.style.fontSize = "2rem"; 
         prompt.style.color = "var(--gold)"; 
         prompt.style.fontWeight = "bold";
