@@ -140,7 +140,7 @@ input {
 
 #game-board {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto repeat(6, 1fr); 
     gap: 10px;
     max-width: 1200px;
