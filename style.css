@@ -1,320 +1,384 @@
 :root {
-    --bg-color: #0d1117;
-    --card-bg: #161b22;
-    --primary: #00ff9d; /* Неоновый зеленый */
-    --secondary: #58a6ff; /* Голубой */
-    --accent: #ff7b72; /* Красный */
-    --gold: #ffd700;
-    --text: #ffffff;
+    --bg-dark: #070b19;
+    --card-bg: #0d152d;
+    --neon-blue: #00d2ff;
+    --neon-green: #00ff87;
+    --neon-yellow: #ffd000;
+    --neon-pink: #ff007f;
+    --text-main: #f0f4fc;
+    --border-color: #1e2c52;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     font-family: 'Roboto Mono', monospace;
-    background-color: var(--bg-color);
-    color: var(--text);
-    height: 100vh; 
-    overflow: hidden; 
-}
-
-/* УПРАВЛЕНИЕ ЭКРАНАМИ */
-.screen {
-    display: none;
-    height: 100vh; 
-    width: 100%;
-    padding: 10px 20px; 
-    box-sizing: border-box;
-    flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
 }
 
-.screen.active {
+.container {
+    width: 95%;
+    max-width: 1200px;
+    padding: 20px;
     display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-#start-screen {
-    background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-    position: relative;
-}
-
-.overlay {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
-    border: 2px solid var(--primary);
-    box-shadow: 0 0 20px var(--primary);
-}
-
-.glitch-text {
-    font-size: 2.5rem; 
-    margin: 0 0 15px 0;
-    text-shadow: 2px 2px var(--primary);
-    text-align: center;
-}
-
-/* Кнопки */
-.neon-btn {
-    background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    padding: 10px 20px; 
-    font-size: 1rem;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: bold;
-    transition: 0.3s;
-    margin-top: 15px;
-    text-transform: uppercase;
-}
-
-.neon-btn:hover {
-    background: var(--primary);
-    color: #000;
-    box-shadow: 0 0 15px var(--primary);
-}
-
-.danger-btn {
-    border-color: var(--accent);
-    color: var(--accent);
-    margin-top: 10px; 
-    margin-bottom: 5px;
-    width: 100%;
-    max-width: 400px;
-}
-.danger-btn:hover {
-    background: var(--accent);
-    color: #fff;
-    box-shadow: 0 0 15px var(--accent);
-}
-
-/* Настройки */
-.input-group { margin: 20px; text-align: center; }
-input {
-    padding: 10px;
-    background: var(--card-bg);
-    border: 1px solid var(--secondary);
-    color: white;
-    font-family: inherit;
-    font-size: 1rem;
-}
-.team-name-input {
-    display: block;
-    margin: 10px auto;
-    width: 300px;
-    text-align: center;
-}
-.hidden { display: none; }
-
-/* ИГРОВОЕ ПОЛЕ */
-#game-screen {
-    justify-content: space-between; 
-    padding-bottom: 15px;
-}
-
-.game-header {
-    width: 100%;
-    flex-shrink: 0; 
-}
-
-#scoreboard {
+/* Шапка и табло очков */
+.header {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
     background: var(--card-bg);
-    border-bottom: 2px solid var(--secondary);
-    margin-bottom: 10px;
-    border-radius: 5px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.active-grade-badge {
+    display: inline-block;
+    background: var(--neon-blue);
+    color: var(--bg-dark);
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-right: 10px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.score-board {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.team-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.team-name {
+    font-size: 0.85rem;
+    color: #8fa0c9;
 }
 
 .team-score {
-    font-size: 1.1rem;
-    padding: 5px 10px;
-    border: 1px solid var(--secondary);
-    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--neon-green);
 }
 
-#game-board {
+.vs-divider {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    color: var(--neon-pink);
+}
+
+/* Кнопки бонусов (+5, +10, -5) */
+.bonus-controls {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.btn-bonus {
+    background: #192545;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-bonus:hover {
+    background: var(--neon-blue);
+    color: var(--bg-dark);
+}
+
+.btn-bonus.penalty:hover {
+    background: var(--neon-pink);
+    color: #fff;
+}
+
+/* Игровое поле */
+.grid-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto repeat(3, 1fr); 
-    gap: 10px;
-    max-width: 1200px;
-    width: 100%;
-    flex-grow: 1; 
-    height: 100%; 
-    overflow: hidden; 
-    margin-bottom: 10px;
+    gap: 15px;
 }
 
-.category-header {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1rem;
-    color: var(--secondary);
+.category-column {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    border-bottom: 1px solid var(--secondary);
+    flex-direction: column;
+    gap: 15px;
 }
 
-.question-btn {
+.category-title {
     background: var(--card-bg);
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    height: 100%; 
-    width: 100%;
-    font-size: 1.5rem;
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    padding: 15px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.point-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--neon-green);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 35px 20px;
+    border-radius: 10px;
+    text-align: center;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 4px;
+    user-select: none;
 }
 
-.question-btn:hover {
-    background: var(--primary);
-    color: #000;
+.point-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 135, 0.3);
 }
 
-.question-btn.disabled {
-    background: #1a1a1a;
-    border-color: #333;
-    color: #333;
+.point-card.card-100 {
+    color: var(--neon-yellow);
+}
+
+.point-card.card-100:hover {
+    border-color: var(--neon-yellow);
+    box-shadow: 0 0 15px rgba(255, 208, 0, 0.4);
+}
+
+.point-card.disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
     pointer-events: none;
+    border-color: #333;
+    transform: none;
+    box-shadow: none;
 }
 
-.special-btn {
-    border-color: var(--gold) !important;
-    color: var(--gold) !important;
-    font-weight: bold;
-    background: rgba(255, 215, 0, 0.05);
+/* Кнопки общие */
+.btn {
+    border: none;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    border-radius: 6px;
+    transition: 0.2s;
 }
 
-.special-btn:hover {
-    background: var(--gold) !important;
-    color: #000 !important;
-    box-shadow: 0 0 15px var(--gold);
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.75rem;
 }
 
-/* ИТОГИ */
-.winner-box {
-    text-align: center;
-    border: 2px solid var(--gold);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-    margin-bottom: 20px;
-    background: var(--card-bg);
+.btn-secondary {
+    background: #1f2e52;
+    color: var(--text-main);
+}
+
+.btn-finish {
     width: 100%;
-    max-width: 600px;
+    background: transparent;
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
-.cup-icon { font-size: 3rem; margin-bottom: 5px; }
-
-#winner-name { 
-    font-size: 2rem; 
-    color: var(--gold); 
-    margin: 5px 0; 
-    /* Добавлено для длинных имен или списка */
-    word-wrap: break-word;
-    white-space: pre-wrap; 
+.btn-finish:hover {
+    background: var(--neon-pink);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
 }
 
-#winner-score { font-size: 1.2rem; color: #fff; }
-
-.results-list { width: 100%; max-width: 500px; overflow-y: auto; max-height: 35vh;}
-
-.result-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background: var(--card-bg);
-    margin-bottom: 5px;
-    border-radius: 5px;
-    border: 1px solid #333;
-}
-
-.result-row span:first-child {
-    font-weight: bold;
-}
-
-/* МОДАЛЬНОЕ ОКНО */
+/* Модальные окна */
 .modal {
-    display: none;
     position: fixed;
-    z-index: 100;
-    left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.95);
-    overflow-y: auto;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(4, 7, 18, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.active {
+    display: flex;
 }
 
 .modal-content {
-    background-color: var(--card-bg);
-    margin: 2% auto;
-    padding: 20px;
-    border: 2px solid var(--primary);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 14px;
+    max-width: 650px;
     width: 90%;
-    max-width: 800px;
     text-align: center;
-    position: relative;
-    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
 }
 
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
-    color: var(--accent);
+.glow-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-blue);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
 }
 
-#question-category-display { color: var(--secondary); font-size: 0.9rem;}
-#question-points-display { font-size: 2rem; color: var(--primary); margin-bottom: 10px;}
-#question-text { font-size: 1.4rem; line-height: 1.4; margin-bottom: 20px; white-space: pre-wrap; }
+.subtitle {
+    color: #9cb0db;
+    margin-bottom: 25px;
+}
 
-#team-buttons-container {
+.grade-buttons {
     display: flex;
+    gap: 15px;
     justify-content: center;
+}
+
+.grade-btn {
+    background: #182548;
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 15px 30px;
+    font-size: 1.2rem;
+}
+
+.grade-btn:hover {
+    background: var(--neon-blue);
+    color: var(--bg-dark);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+}
+
+/* Карточка открытого вопроса */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tag-category {
+    color: var(--neon-blue);
+    font-weight: 700;
+}
+
+.tag-points {
+    color: var(--neon-yellow);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+}
+
+.question-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-top: 15px;
-    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.team-select-btn {
-    background: var(--secondary);
-    border: none;
+.option-item {
+    background: #16203d;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+.answer-reveal {
+    background: rgba(0, 255, 135, 0.1);
+    border: 1px dashed var(--neon-green);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.answer-title {
+    font-size: 0.85rem;
+    color: var(--neon-green);
+}
+
+.answer-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-show {
+    background: var(--neon-yellow);
     color: #000;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    border-radius: 3px;
-}
-.team-select-btn:hover { background: #fff; }
-
-.cancel-btn {
-    background: var(--accent);
-    border: none;
-    color: white;
-    padding: 12px 25px;
-    margin-top: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: 0.3s;
-    display: inline-block;
+    padding: 10px 25px;
+    font-weight: 700;
 }
 
-.cancel-btn:hover {
-    background: #e5534b;
-    box-shadow: 0 0 10px var(--accent);
+.award-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-award {
+    padding: 8px 16px;
+    color: #fff;
+}
+
+.btn-award.team1 { background: #2563eb; }
+.btn-award.team2 { background: #7c3aed; }
+.btn-close { background: #475569; color: #fff; padding: 8px 16px; }
+
+/* Итоги игры */
+.winner-declaration {
+    font-size: 1.6rem;
+    color: var(--neon-yellow);
+    margin: 20px 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.final-scores {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
 }
