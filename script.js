@@ -1,354 +1,240 @@
-// База заданий по классам
 const quizDataByGrade = {
     '6': [
         {
-            category: "Устройство и файлы",
+            category: "🎮 IT-Детектив",
             questions: [
                 {
                     points: 10,
-                    question: "Какое расширение файла обычно указывает на текстовый документ?",
-                    options: [".mp3", ".docx", ".png", ".exe"],
-                    answer: ".docx"
+                    question: "Вы скачали файл с читами для игры, но у него расширение .exe вместо .png. Что произойдет, если его открыть?",
+                    options: [
+                        "Откроется красивая картинка",
+                        "Запустится программа (возможно вирус)",
+                        "Файл откроется в Блокноте",
+                        "Компьютер выключится навсегда"
+                    ],
+                    answer: "Запустится программа (файлы .exe — исполняемые)"
                 },
                 {
                     points: 50,
-                    question: "Какое сочетание клавиш используется для отмены последнего действия?",
-                    options: ["Ctrl + C", "Ctrl + V", "Ctrl + Z", "Ctrl + A"],
-                    answer: "Ctrl + Z"
+                    question: "Кот прошелся по клавиатуре и случайно удалил 5 страниц вашего доклада! Какое заклинание клавиш спасет ситуацию?",
+                    options: ["Alt + F4", "Ctrl + Z", "Ctrl + Shift + Esc", "Win + L"],
+                    answer: "Ctrl + Z (Отмена последнего действия)"
                 },
                 {
                     points: 100,
-                    question: "★ Задача: На флешку объемом 2 Мб сохраняют фото по 512 Кб каждое. Сколько максимум фото поместится на флешку?",
-                    options: ["2", "4", "8", "1024"],
-                    answer: "4 (2 Мб = 2048 Кб; 2048 / 512 = 4)"
+                    question: "★ Детектив: Шпион передал координаты базы, зашифрованные кодом: 'Каждая буква заменена на ее номер в алфавите'. Получилось: 1 13 14 1. Какое слово зашифровано?",
+                    options: ["АЛМА", "АЛМАЗ", "АННА", "АТАК"],
+                    answer: "АЛМА (1=А, 13=Л, 14=М, 1=А)"
                 }
             ]
         },
         {
-            category: "Кибергигиена",
+            category: "🕵️ Кибер-Защита",
             questions: [
                 {
                     points: 10,
-                    question: "Какой из приведенных паролей является наиболее надежным?",
-                    options: ["12345678", "qwerty", "ivan2012", "R#9t_W2026!"],
-                    answer: "R#9t_W2026!"
+                    question: "Вам в игре пишет 'админ': «Привет! Срочно скинь свой пароль для начисления 1000 бесплатных скинов». Ваши действия?",
+                    options: [
+                        "Скину пароль, скины же бесплатные!",
+                        "Скину половину пароля для проверки",
+                        "Отправлю жалобу в поддержку и заблокирую",
+                        "Попрошу сначала показать скины"
+                    ],
+                    answer: "Отправлю жалобу в поддержку (настоящая администрация никогда не просит пароли)"
                 },
                 {
                     points: 50,
-                    question: "Как называется интернет-мошенничество с поддельными сайтами для кражи логинов и паролей?",
-                    options: ["Спам", "Фишинг", "Стриминг", "Блогинг"],
-                    answer: "Фишинг"
+                    question: "Какой из этих паролей взломают быстрее, чем вы моргнете глазом?",
+                    options: ["QwErTy_2026!", "123456", "K!ber_Kotik_88", "v@sya_IT_pro"],
+                    answer: "123456 (находится на 1-м месте в топе самых взламываемых паролей)"
                 },
                 {
                     points: 100,
-                    question: "★ Логика: Робот А: «Я не синий и не зеленый». Робот Б: «Я не синий». Всего 3 цвета: красный, зеленый, синий. Какого цвета Робот В?",
-                    options: ["Красный", "Зеленый", "Синий"],
-                    answer: "Синий (А — красный, Б — зеленый, В — синий)"
+                    question: "★ Взломщик: Три сервера закрыты кодовыми замками: Синий, Красный и Желтый. Известно: \n1) Вирус НЕ в Красном сервере; \n2) Вирус в Синем ИЛИ в Красном. \nГде спрятан вирус?",
+                    options: ["В Синем", "В Красном", "В Желтом", "Вируса нет"],
+                    answer: "В Синем (Если вируса нет в Красном, но он в Синем или Красном, значит он точно в Синем)"
                 }
             ]
         },
         {
-            category: "Алгоритмы",
+            category: "🤖 Роботы и Логика",
             questions: [
                 {
                     points: 10,
-                    question: "Как называется алгоритм, в котором команды выполняются строго друг за другом без ветвлений?",
-                    options: ["Линейный", "Циклический", "Разветвленный", "Хаотичный"],
-                    answer: "Линейный"
+                    question: "Робот-пылесос застрял под диваном и повторяет: «Ехать вперед, пока не врежешься». Как в программировании называется такое повторение?",
+                    options: ["Константа", "Ветвление", "Цикл", "Переменная"],
+                    answer: "Цикл"
                 },
                 {
                     points: 50,
-                    question: "Робот стоял в точке (0, 0). Выполнил: Вправо 4, Вверх 5, Влево 1, Вниз 2. Где он оказался?",
-                    options: ["(3, 3)", "(5, 7)", "(4, 5)", "(3, 2)"],
-                    answer: "(3, 3)"
+                    question: "Дрон взлетел из точки (0, 0), пролетел 10 м на Север, 5 м на Восток, 10 м на Юг и 5 м на Запад. Где он приземлился?",
+                    options: ["(10, 5)", "(5, 10)", "(0, 0)", "Потерялся в лесу"],
+                    answer: "(0, 0) — вернулся в исходную точку"
                 },
                 {
                     points: 100,
-                    question: "★ Цикл: S = 0. Повторить 4 раза: [S = S + 5]. Чему равно S после завершения алгоритма?",
-                    options: ["5", "9", "20", "25"],
-                    answer: "20"
+                    question: "★ Прокачка героя: У мага 100 HP. В цикле: 'Повторить 3 раза: [Урон -30, Зелье +10]'. После цикла маг нашел Супер-зелье (+50 HP). Сколько HP осталось у мага?",
+                    options: ["40 HP", "60 HP", "90 HP", "110 HP"],
+                    answer: "90 HP (За 1 круг теряет 20 HP. За 3 круга: 100 - 60 = 40 HP. Плюс Супер-зелье: 40 + 50 = 90 HP)"
                 }
             ]
         }
     ],
     '7': [
         {
-            category: "Информация",
+            category: "📦 Битва Байтов",
             questions: [
                 {
                     points: 10,
-                    question: "Сколько бит содержится ровно в 4 байтах?",
-                    options: ["16", "32", "64", "128"],
-                    answer: "32 бита (4 * 8)"
+                    question: "Если 1 символ в кодировке весит ровно 1 байт, сколько символов поместится в сообщении весом 64 бита?",
+                    options: ["8", "16", "32", "64"],
+                    answer: "8 символов (64 бита = 8 байт = 8 символов)"
                 },
                 {
                     points: 50,
-                    question: "Алфавит содержит 64 символа. Сколько бит весит один символ (N = 2^i)?",
-                    options: ["4 бита", "5 бит", "6 бит", "8 бит"],
-                    answer: "6 бит (2^6 = 64)"
+                    question: "Инопланетяне используют алфавит всего из 4 знаков: 👽, 🚀, ⭐, 👾. Сколько бит весит один инопланетный символ?",
+                    options: ["1 бит", "2 бита", "4 бита", "8 бит"],
+                    answer: "2 бита (по формуле Хартли: 4 = 2^2)"
                 },
                 {
                     points: 100,
-                    question: "★ Задача: В статье 2 страницы, по 32 строки, в каждой строке 64 символа. 1 символ = 1 байт. Сколько это Кб?",
-                    options: ["2 Кб", "4 Кб", "8 Кб", "4096 Кб"],
-                    answer: "4 Кб (2 * 32 * 64 = 4096 байт = 4 Кб)"
+                    question: "★ Загрузка игры: Обновление весит 16 Мегабайт. Скорость интернета — 4 Мегабита в секунду. За сколько секунд скачается файл?",
+                    options: ["4 секунды", "16 секунд", "32 секунды", "64 секунды"],
+                    answer: "32 секунды (16 Мб = 128 Мбит. Время = 128 / 4 = 32 сек)"
                 }
             ]
         },
         {
-            category: "Файлы и ОС",
+            category: "🧩 Маски и Файлы",
             questions: [
                 {
                     points: 10,
-                    question: "Какой символ в маске поиска заменяет ровно один произвольный символ?",
-                    options: ["*", "?", "#", "$"],
-                    answer: "?"
+                    question: "Геймер ищет скриншоты по маске screen_???.png. Какой файл найдет система?",
+                    options: ["screen_1.png", "screen_999.png", "screen_final.png", "screen_2026.png"],
+                    answer: "screen_999.png (ровно 3 символа вместо трех знаков вопроса)"
                 },
                 {
                     points: 50,
-                    question: "По маске '*b?t.t*' будет найден какой файл?",
-                    options: ["robot.txt", "about.docx", "bite.text", "best.mp3"],
-                    answer: "robot.txt"
+                    question: "Где окажется файл, если его переместить из C:\\Games\\Minecraft в папку ..\\Saves?",
+                    options: [
+                        "C:\\Games\\Minecraft\\Saves",
+                        "C:\\Games\\Saves",
+                        "C:\\Saves",
+                        "Файл удалится"
+                    ],
+                    answer: "C:\\Games\\Saves ('..' означает подъем на один уровень вверх)"
                 },
                 {
                     points: 100,
-                    question: "★ Пути к файлам: Из C:\\Учеба\\7класс\\Инфо поднялись на 2 уровня вверх, вошли в 'Тесты' и создали 'f.txt'. Каков путь?",
-                    options: ["C:\\Учеба\\Тесты\\f.txt", "C:\\Тесты\\f.txt", "C:\\f.txt"],
-                    answer: "C:\\Учеба\\Тесты\\f.txt"
+                    question: "★ Шифр хакера: По маске *a?t*.mp* нашлись 3 секретные аудиозаписи. Какое имя файла НЕ могло подойти под эту маску?",
+                    options: ["start.mp3", "action.mp4", "party.mp3", "artist.mp3"],
+                    answer: "artist.mp3 (после буквы 'a' сразу идет 'r', а не символ + 't')"
                 }
             ]
         },
         {
-            category: "Кумир / Робот",
+            category: "⚡ Алгоритмика",
             questions: [
                 {
                     points: 10,
-                    question: "Какая команда исполнителя Робот закрашивает текущую клетку?",
-                    options: ["закрасить", "красить", "цвет", "paint"],
-                    answer: "закрасить"
+                    question: "Какое условие нужно написать роботу, чтобы он шел вперед, пока не встретит пропасть?",
+                    options: ["пока впереди стена", "пока впереди свободно", "пока не упал", "если свободно то шаг"],
+                    answer: "пока впереди свободно"
                 },
                 {
                     points: 50,
-                    question: "Сколько шагов сделает Робот в цикле: 'нц 6 раз вправо кц'?",
-                    options: ["5", "6", "7", "Бесконечно"],
-                    answer: "6 шагов"
+                    question: "Сколько клеток закрасит робот по алгоритму: \nнц 4 раз \n  вправо; закрасить \nкц",
+                    options: ["3 клетки", "4 клетки", "5 клеток", "Ни одной"],
+                    answer: "4 клетки"
                 },
                 {
                     points: 100,
-                    question: "★ Коридор из 5 свободных клеток заканчивается стеной справа. Сколько шагов сделает Робот: 'нц пока справа свободно вправо кц'?",
-                    options: ["4 шага", "5 шагов", "6 шагов", "Разобьется"],
-                    answer: "5 шагов"
+                    question: "★ Логический лабиринт: Автопилот машины поворачивает направо, если перед ним стена, иначе едет прямо. Машина заехала в глухой квадратный тупик 1x1 метр. Что с ней произойдет?",
+                    options: [
+                        "Остановится",
+                        "Будет бесконечно крутиться на месте",
+                        "Сломает стену",
+                        "Развернется назад и уедет"
+                    ],
+                    answer: "Будет бесконечно крутиться на месте (зациклится в бесконечных поворотах направо)"
                 }
             ]
         }
     ],
     '8': [
         {
-            category: "Системы счисления",
+            category: "🔢 Системы Счисления",
             questions: [
                 {
                     points: 10,
-                    question: "Переведите двоичное число 1010_2 в десятичную систему счисления:",
-                    options: ["8", "10", "12", "14"],
-                    answer: "10"
+                    question: "Сколько пальцев на двух руках у робота, который считает в двоичной системе счисления?",
+                    options: ["2 пальца", "1010 пальцев", "10 пальцев", "100 пальцев"],
+                    answer: "1010_2 пальцев (10 в десятичной = 1010 в двоичной)"
                 },
                 {
                     points: 50,
-                    question: "Какое из чисел больше: 10000_2, 20_8 или 11_16?",
-                    options: ["10000_2 (16)", "20_8 (16)", "11_16 (17)", "Они равны"],
-                    answer: "11_16 (17)"
+                    question: "В игре у персонажа 1F жизней в шестнадцатеричной системе. Сколько это в обычной десятичной системе?",
+                    options: ["15 HP", "25 HP", "31 HP", "115 HP"],
+                    answer: "31 HP (1 * 16 + 15 = 31)"
                 },
                 {
                     points: 100,
-                    question: "★ Задача: Вычислите сумму в 10-й системе: 1101_2 + 1011_2",
-                    options: ["20", "22", "24", "26"],
-                    answer: "24 (13 + 11 = 24)"
+                    question: "★ Блиц-счет: Какое число идет СЛЕДУЮЩИМ сразу после двоичного числа 11111_2?",
+                    options: ["11112", "100000", "20000", "111111"],
+                    answer: "100000_2 (31 + 1 = 32, а 32 в двоичной это единица и пять нулей)"
                 }
             ]
         },
         {
-            category: "Алгебра логики",
+            category: "🧠 Кибер-Логика",
             questions: [
                 {
                     points: 10,
-                    question: "Какая логическая операция истинна только тогда, когда оба высказывания истинны?",
-                    options: ["И (Конъюнкция)", "ИЛИ (Дизъюнкция)", "НЕ (Инверсия)"],
-                    answer: "И (Конъюнкция)"
+                    question: "Умный дом включает свет, только если: (На улице темно) И (Датчик видит человека). На улице темно, но в комнате никого нет. Загорится ли свет?",
+                    options: ["Да", "Нет", "Будет мигать", "Включится музыка"],
+                    answer: "Нет (операция И требует обязательного выполнения обоих условий)"
                 },
                 {
                     points: 50,
-                    question: "Для какого числа ИСТИННО: НЕ (X < 5) И (X четное)?",
-                    options: ["3", "4", "7", "8"],
-                    answer: "8 (X >= 5 и четное)"
+                    question: "Для какого из игроков истинно условие: НЕ (Рейтинг < 1000) И (Побед > 50)?",
+                    options: [
+                        "Алекс: Рейтинг 900, Побед 60",
+                        "Макс: Рейтинг 1200, Побед 40",
+                        "Олег: Рейтинг 1500, Побед 75",
+                        "Игорь: Рейтинг 800, Побед 30"
+                    ],
+                    answer: "Олег (Рейтинг >= 1000 и Побед > 50)"
                 },
                 {
                     points: 100,
-                    question: "★ Задача ОГЭ: Для какого наименьшего целого X ложно выражение: НЕ (X >= 7) ИЛИ (X нечетное)?",
-                    options: ["2", "4", "6", "8"],
-                    answer: "8 (Обе части должны быть ложны: X >= 7 и X четное -> min = 8)"
+                    question: "★ Детектив ОГЭ: Найдите наименьшее натуральное число X, для которого ЛОЖНО выражение:\nНЕ (X < 15) ИЛИ (X не делится на 4)",
+                    options: ["12", "16", "20", "24"],
+                    answer: "16 (Обе части должны быть ложны: X >= 15 И X делится на 4 -> минимальное число 16)"
                 }
             ]
         },
         {
-            category: "Python код",
+            category: "🐍 Python Hacks",
             questions: [
                 {
                     points: 10,
-                    question: "Что выведет команда Python: print(17 // 5)?",
-                    options: ["3.4", "3", "2", "3.0"],
-                    answer: "3 (целочисленное деление)"
+                    question: "Что напечатает Питон при запуске команды: print('Cyber' * 3)?",
+                    options: ["Cyber3", "Cyber Cyber Cyber", "CyberCyberCyber", "Ошибка"],
+                    answer: "CyberCyberCyber (умножение строки дублирует ее без пробелов)"
                 },
                 {
                     points: 50,
-                    question: "Определите x: a = 12; b = 5; x = (a % b) * 3",
-                    options: ["6", "9", "3", "0"],
-                    answer: "6 (12 % 5 = 2; 2 * 3 = 6)"
+                    question: "Что выведет код?\nx = 20\ny = 6\nprint(x % y + x // y)",
+                    options: ["5", "3.33", "7", "2"],
+                    answer: "5 (x % y = 2 (остаток), x // y = 3 (целая часть). 2 + 3 = 5)"
                 },
                 {
                     points: 100,
-                    question: "★ Анализ кода:\ns = 0\nfor i in range(1, 6):\n    s += i * 2\nprint(s)",
-                    options: ["15", "20", "30", "42"],
-                    answer: "30 (2 + 4 + 6 + 8 + 10 = 30)"
+                    question: "★ Трассировка бага:\ns = 0\nfor i in range(1, 10, 3):\n    s += i\nprint(s)\nЧему равно s?",
+                    options: ["12", "15", "18", "21"],
+                    answer: "12 (range(1, 10, 3) перебирает числа: 1, 4, 7. Сумма: 1 + 4 + 7 = 12)"
                 }
             ]
         }
     ]
 };
-
-// Состояние игры
-let currentGrade = '6';
-let scores = { 1: 0, 2: 0 };
-let currentActiveCard = null;
-let currentPoints = 0;
-
-// Инициализация при старте
-function startQuiz(grade) {
-    currentGrade = grade;
-    scores = { 1: 0, 2: 0 };
-    updateScoresUI();
-    
-    document.getElementById('current-grade-badge').innerText = `${grade} класс`;
-    document.getElementById('grade-modal').classList.remove('active');
-    document.getElementById('game-container').style.display = 'flex';
-    
-    buildBoard();
-}
-
-function resetToGradeSelection() {
-    document.getElementById('question-modal').classList.remove('active');
-    document.getElementById('result-modal').classList.remove('active');
-    document.getElementById('game-container').style.display = 'none';
-    document.getElementById('grade-modal').classList.add('active');
-}
-
-// Построение сетки карточек
-function buildBoard() {
-    const board = document.getElementById('board');
-    board.innerHTML = '';
-    const categories = quizDataByGrade[currentGrade];
-
-    categories.forEach((cat, catIdx) => {
-        const col = document.createElement('div');
-        col.className = 'category-column';
-
-        const title = document.createElement('div');
-        title.className = 'category-title';
-        title.innerText = cat.category;
-        col.appendChild(title);
-
-        cat.questions.forEach((q, qIdx) => {
-            const card = document.createElement('div');
-            card.className = `point-card ${q.points === 100 ? 'card-100' : ''}`;
-            card.innerText = q.points === 100 ? `★ ${q.points}` : q.points;
-            
-            card.onclick = () => openQuestion(cat.category, q, card);
-            col.appendChild(card);
-        });
-
-        board.appendChild(col);
-    });
-}
-
-// Открытие окна вопроса
-function openQuestion(categoryName, questionObj, cardElement) {
-    currentActiveCard = cardElement;
-    currentPoints = questionObj.points;
-
-    document.getElementById('modal-category').innerText = categoryName;
-    document.getElementById('modal-points').innerText = `${questionObj.points} баллов`;
-    document.getElementById('modal-question-text').innerText = questionObj.question;
-    
-    // Рендер вариантов ответа
-    const optionsBox = document.getElementById('modal-options');
-    optionsBox.innerHTML = '';
-    if (questionObj.options && questionObj.options.length > 0) {
-        questionObj.options.forEach(opt => {
-            const item = document.createElement('div');
-            item.className = 'option-item';
-            item.innerText = opt;
-            optionsBox.appendChild(item);
-        });
-        optionsBox.style.display = 'grid';
-    } else {
-        optionsBox.style.display = 'none';
-    }
-
-    document.getElementById('correct-answer-text').innerText = questionObj.answer;
-    
-    // Сброс видимости кнопок
-    document.getElementById('answer-reveal').style.display = 'none';
-    document.getElementById('award-controls').style.display = 'none';
-    document.getElementById('btn-show-ans').style.display = 'block';
-
-    document.getElementById('question-modal').classList.add('active');
-}
-
-// Показ ответа
-function revealAnswer() {
-    document.getElementById('answer-reveal').style.display = 'block';
-    document.getElementById('btn-show-ans').style.display = 'none';
-    document.getElementById('award-controls').style.display = 'flex';
-}
-
-// Начисление основных баллов
-function awardPoints(teamNumber) {
-    scores[teamNumber] += currentPoints;
-    updateScoresUI();
-    closeModal(true);
-}
-
-// Ручное добавление бонусов / штрафов (+5, +10, -5)
-function addCustomPoints(teamNumber, points) {
-    scores[teamNumber] += points;
-    if (scores[teamNumber] < 0) scores[teamNumber] = 0; // Не уходим в минус
-    updateScoresUI();
-}
-
-function closeModal(markAsDisabled) {
-    if (markAsDisabled && currentActiveCard) {
-        currentActiveCard.classList.add('disabled');
-    }
-    document.getElementById('question-modal').classList.remove('active');
-}
-
-function updateScoresUI() {
-    document.getElementById('score-team1').innerText = scores[1];
-    document.getElementById('score-team2').innerText = scores[2];
-}
-
-// Завершение игры
-function finishGame() {
-    document.getElementById('final-team1').innerText = scores[1];
-    document.getElementById('final-team2').innerText = scores[2];
-
-    const winnerText = document.getElementById('winner-text');
-    if (scores[1] > scores[2]) {
-        winnerText.innerText = "🏆 Победа Команды 1!";
-    } else if (scores[2] > scores[1]) {
-        winnerText.innerText = "🏆 Победа Команды 2!";
-    } else {
-        winnerText.innerText = "🤝 Боевая ничья!";
-    }
-
-    document.getElementById('result-modal').classList.add('active');
-}
