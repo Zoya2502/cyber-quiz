@@ -26,8 +26,8 @@ body {
 }
 
 .container {
-    width: 95%;
-    max-width: 1200px;
+    width: 96%;
+    max-width: 1250px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -40,9 +40,11 @@ body {
     justify-content: space-between;
     align-items: center;
     background: var(--card-bg);
-    padding: 15px 25px;
+    padding: 15px 20px;
     border-radius: 12px;
     border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .active-grade-badge {
@@ -50,7 +52,7 @@ body {
     background: var(--neon-blue);
     color: var(--bg-dark);
     font-weight: 700;
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: 6px;
     margin-right: 10px;
     font-family: 'Orbitron', sans-serif;
@@ -59,48 +61,49 @@ body {
 .score-board {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .team-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-color);
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-radius: 8px;
     text-align: center;
+    min-width: 120px;
 }
 
 .team-name {
     font-size: 0.85rem;
     color: #8fa0c9;
+    font-weight: 600;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .team-score {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--neon-green);
+    margin: 2px 0;
 }
 
-.vs-divider {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    color: var(--neon-pink);
-}
-
-/* Кнопки бонусов (+5, +10, -5) */
 .bonus-controls {
     display: flex;
-    gap: 5px;
-    margin-top: 5px;
+    gap: 4px;
+    justify-content: center;
 }
 
 .btn-bonus {
     background: #192545;
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    padding: 3px 8px;
-    font-size: 0.75rem;
+    padding: 2px 6px;
+    font-size: 0.7rem;
     border-radius: 4px;
     cursor: pointer;
     transition: 0.2s;
@@ -137,7 +140,7 @@ body {
     text-align: center;
     padding: 15px 10px;
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
 }
 
@@ -180,7 +183,7 @@ body {
     box-shadow: none;
 }
 
-/* Кнопки общие */
+/* Кнопки */
 .btn {
     border: none;
     cursor: pointer;
@@ -204,7 +207,7 @@ body {
     background: transparent;
     border: 1px solid var(--neon-pink);
     color: var(--neon-pink);
-    padding: 15px;
+    padding: 14px;
     font-size: 1.1rem;
     font-weight: 700;
 }
@@ -215,14 +218,14 @@ body {
     box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
 }
 
-/* Модальные окна */
+/* Модальные окна и настройки */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(4, 7, 18, 0.85);
+    background: rgba(4, 7, 18, 0.88);
     backdrop-filter: blur(8px);
     display: none;
     justify-content: center;
@@ -242,42 +245,96 @@ body {
     max-width: 650px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .glow-title {
     font-family: 'Orbitron', sans-serif;
     color: var(--neon-blue);
-    font-size: 2.2rem;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 5px;
 }
 
 .subtitle {
     color: #9cb0db;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
 }
 
-.grade-buttons {
+.setup-section {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.setup-label {
+    display: block;
+    color: #8fa0c9;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.grade-buttons, .team-count-buttons {
     display: flex;
-    gap: 15px;
-    justify-content: center;
+    gap: 10px;
 }
 
-.grade-btn {
-    background: #182548;
-    border: 1px solid var(--neon-blue);
-    color: var(--neon-blue);
-    padding: 15px 30px;
-    font-size: 1.2rem;
+.grade-btn, .count-btn {
+    flex: 1;
+    background: #141f3d;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px;
+    font-size: 0.9rem;
 }
 
-.grade-btn:hover {
+.grade-btn.active, .count-btn.active {
     background: var(--neon-blue);
     color: var(--bg-dark);
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+    border-color: var(--neon-blue);
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
 }
 
-/* Карточка открытого вопроса */
+.team-names-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.team-input-item input {
+    width: 100%;
+    background: #141f3d;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: 6px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.team-input-item input:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+}
+
+.btn-start {
+    width: 100%;
+    background: var(--neon-green);
+    color: var(--bg-dark);
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.btn-start:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 135, 0.5);
+}
+
+/* Окно вопроса */
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -296,9 +353,9 @@ body {
 }
 
 .question-text {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     white-space: pre-wrap;
     text-align: left;
 }
@@ -315,35 +372,28 @@ body {
     padding: 10px;
     border-radius: 6px;
     border: 1px solid var(--border-color);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-align: left;
 }
 
 .answer-reveal {
     background: rgba(0, 255, 135, 0.1);
     border: 1px dashed var(--neon-green);
-    padding: 15px;
+    padding: 12px;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
 .answer-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--neon-green);
 }
 
 .answer-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #fff;
-    margin-top: 5px;
-}
-
-.modal-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
+    margin-top: 4px;
 }
 
 .btn-show {
@@ -353,32 +403,63 @@ body {
     font-weight: 700;
 }
 
-.award-buttons {
+.award-controls {
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    align-items: center;
+    width: 100%;
+}
+
+.award-label {
+    font-size: 0.85rem;
+    color: #8fa0c9;
+}
+
+.award-buttons-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
 }
 
 .btn-award {
-    padding: 8px 16px;
+    padding: 8px 14px;
     color: #fff;
+    background: #2563eb;
+    font-size: 0.85rem;
 }
 
-.btn-award.team1 { background: #2563eb; }
-.btn-award.team2 { background: #7c3aed; }
-.btn-close { background: #475569; color: #fff; padding: 8px 16px; }
+.btn-award:hover {
+    filter: brightness(1.2);
+}
 
-/* Итоги игры */
+.btn-close {
+    background: #475569;
+    color: #fff;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+}
+
+/* Итоги */
 .winner-declaration {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--neon-yellow);
     margin: 20px 0;
     font-family: 'Orbitron', sans-serif;
 }
 
-.final-scores {
+.final-scores-list {
     display: flex;
-    justify-content: space-around;
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.final-score-row {
+    display: flex;
+    justify-content: space-between;
+    background: #141f3d;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 1.1rem;
 }
