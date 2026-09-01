@@ -218,7 +218,7 @@ body {
     box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
 }
 
-/* Модальные окна и настройки */
+/* Модальные окна */
 .modal {
     position: fixed;
     top: 0;
@@ -334,7 +334,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 255, 135, 0.5);
 }
 
-/* Окно вопроса */
+/* Карточка вопроса */
 .modal-header {
     display: flex;
     justify-content: space-between;
