@@ -333,7 +333,7 @@ const quizDataByGrade = {
     ]
 };
 
-// Состояние приложения
+// Состояние игры
 let selectedGrade = '6';
 let teamCount = 2;
 let teams = [];
@@ -571,7 +571,7 @@ function finishGame() {
     document.getElementById('result-modal').classList.add('active');
 }
 
-// Экспорт функций в window для доступности из HTML
+// Экспорт функций в window
 window.selectGrade = selectGrade;
 window.setTeamCount = setTeamCount;
 window.startGame = startGame;
@@ -583,9 +583,8 @@ window.addCustomPoints = addCustomPoints;
 window.closeModal = closeModal;
 window.finishGame = finishGame;
 
-// Навешивание слушателей событий после загрузки документа
+// Навешивание событий
 document.addEventListener('DOMContentLoaded', () => {
-    // Выбор класса
     const gradeGroup = document.getElementById('grade-buttons-group');
     if (gradeGroup) {
         gradeGroup.addEventListener('click', (e) => {
@@ -594,7 +593,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Выбор количества команд
     const countGroup = document.getElementById('team-count-group');
     if (countGroup) {
         countGroup.addEventListener('click', (e) => {
@@ -603,7 +601,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Основные кнопки
     const btnStart = document.getElementById('btn-start-game');
     if (btnStart) btnStart.addEventListener('click', startGame);
 
@@ -619,6 +616,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnShowAns = document.getElementById('btn-show-ans');
     if (btnShowAns) btnShowAns.addEventListener('click', revealAnswer);
 
-    // Первичная отрисовка полей ввода
     renderTeamInputs();
 });
