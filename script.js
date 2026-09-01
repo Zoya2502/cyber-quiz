@@ -239,37 +239,27 @@ const quizDataByGrade = {
     ]
 };
 
-// Состояние игры
+// Состояние приложения
 let selectedGrade = '6';
 let teamCount = 2;
 let teams = [];
 let currentActiveCard = null;
 let currentPoints = 0;
-
-// Цвета для кнопок команд
 const teamColors = ['#2563eb', '#7c3aed', '#059669', '#d97706'];
 
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', () => {
-    renderTeamInputs();
-});
-
-// Выбор класса
 function selectGrade(grade, btn) {
     selectedGrade = grade;
     document.querySelectorAll('.grade-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    if (btn) btn.classList.add('active');
 }
 
-// Выбор количества команд
 function setTeamCount(count, btn) {
-    teamCount = count;
+    teamCount = parseInt(count, 10);
     document.querySelectorAll('.count-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    if (btn) btn.classList.add('active');
     renderTeamInputs();
 }
 
-// Отрисовка полей ввода названий команд
 function renderTeamInputs() {
     const container = document.getElementById('team-inputs-container');
     if (!container) return;
@@ -285,7 +275,6 @@ function renderTeamInputs() {
     }
 }
 
-// Старт игры
 function startGame() {
     teams = [];
     for (let i = 1; i <= teamCount; i++) {
@@ -294,23 +283,31 @@ function startGame() {
         teams.push({ id: i, name: name, score: 0 });
     }
 
-    document.getElementById('current-grade-badge').innerText = `${selectedGrade} класс`;
-    document.getElementById('setup-modal').classList.remove('active');
-    document.getElementById('game-container').style.display = 'flex';
+    const badge = document.getElementById('current-grade-badge');
+    if (badge) badge.innerText = `${selectedGrade} класс`;
+    
+    const setupModal = document.getElementById('setup-modal');
+    if (setupModal) setupModal.classList.remove('active');
+    
+    const gameContainer = document.getElementById('game-container');
+    if (gameContainer) gameContainer.style.display = 'flex';
 
     renderScoreBoard();
     buildBoard();
 }
 
-// Возврат к экрану настроек
 function resetToSetup() {
-    document.getElementById('question-modal').classList.remove('active');
-    document.getElementById('result-modal').classList.remove('active');
-    document.getElementById('game-container').style.display = 'none';
-    document.getElementById('setup-modal').classList.add('active');
+    const qModal = document.getElementById('question-modal');
+    const rModal = document.getElementById('result-modal');
+    const gContainer = document.getElementById('game-container');
+    const sModal = document.getElementById('setup-modal');
+
+    if (qModal) qModal.classList.remove('active');
+    if (rModal) rModal.classList.remove('active');
+    if (gContainer) gContainer.style.display = 'none';
+    if (sModal) sModal.classList.add('active');
 }
 
-// Отрисовка табло команд
 function renderScoreBoard() {
     const board = document.getElementById('score-board');
     if (!board) return;
@@ -323,16 +320,15 @@ function renderScoreBoard() {
             <div class="team-name" title="${t.name}">${t.name}</div>
             <div class="team-score" id="score-team-${t.id}">${t.score}</div>
             <div class="bonus-controls">
-                <button type="button" class="btn-bonus" onclick="addCustomPoints(${t.id}, 5)">+5</button>
-                <button type="button" class="btn-bonus" onclick="addCustomPoints(${t.id}, 10)">+10</button>
-                <button type="button" class="btn-bonus penalty" onclick="addCustomPoints(${t.id}, -5)">-5</button>
+                <button type="button" class="btn-bonus" onclick="window.addCustomPoints(${t.id}, 5)">+5</button>
+                <button type="button" class="btn-bonus" onclick="window.addCustomPoints(${t.id}, 10)">+10</button>
+                <button type="button" class="btn-bonus penalty" onclick="window.addCustomPoints(${t.id}, -5)">-5</button>
             </div>
         `;
         board.appendChild(card);
     });
 }
 
-// Построение сетки карточек
 function buildBoard() {
     const board = document.getElementById('board');
     if (!board) return;
@@ -363,7 +359,6 @@ function buildBoard() {
     });
 }
 
-// Открытие окна вопроса
 function openQuestion(categoryName, questionObj, cardElement) {
     currentActiveCard = cardElement;
     currentPoints = questionObj.points;
@@ -372,7 +367,6 @@ function openQuestion(categoryName, questionObj, cardElement) {
     document.getElementById('modal-points').innerText = `${questionObj.points} баллов`;
     document.getElementById('modal-question-text').innerText = questionObj.question;
     
-    // Варианты ответов
     const optionsBox = document.getElementById('modal-options');
     optionsBox.innerHTML = '';
     if (questionObj.options && questionObj.options.length > 0) {
@@ -388,8 +382,6 @@ function openQuestion(categoryName, questionObj, cardElement) {
     }
 
     document.getElementById('correct-answer-text').innerText = questionObj.answer;
-    
-    // Сброс видимости кнопок
     document.getElementById('answer-reveal').style.display = 'none';
     document.getElementById('award-controls').style.display = 'none';
     document.getElementById('btn-show-ans').style.display = 'block';
@@ -397,7 +389,6 @@ function openQuestion(categoryName, questionObj, cardElement) {
     document.getElementById('question-modal').classList.add('active');
 }
 
-// Показ ответа и кнопок начисления
 function revealAnswer() {
     document.getElementById('answer-reveal').style.display = 'block';
     document.getElementById('btn-show-ans').style.display = 'none';
@@ -405,7 +396,6 @@ function revealAnswer() {
     const awardList = document.getElementById('award-buttons-list');
     awardList.innerHTML = '';
 
-    // Генерация кнопок для всех участвующих команд
     teams.forEach((t, idx) => {
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -416,7 +406,6 @@ function revealAnswer() {
         awardList.appendChild(btn);
     });
 
-    // Кнопка "Никому"
     const btnNone = document.createElement('button');
     btnNone.type = 'button';
     btnNone.className = 'btn btn-close';
@@ -427,7 +416,6 @@ function revealAnswer() {
     document.getElementById('award-controls').style.display = 'flex';
 }
 
-// Начисление основных баллов
 function awardPoints(teamId) {
     const team = teams.find(t => t.id === teamId);
     if (team) {
@@ -437,7 +425,6 @@ function awardPoints(teamId) {
     closeModal(true);
 }
 
-// Ручное добавление бонусов / штрафов
 function addCustomPoints(teamId, points) {
     const team = teams.find(t => t.id === teamId);
     if (team) {
@@ -461,7 +448,6 @@ function updateScoresUI() {
     });
 }
 
-// Завершение игры
 function finishGame() {
     const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
     const maxScore = sortedTeams[0].score;
@@ -490,3 +476,55 @@ function finishGame() {
 
     document.getElementById('result-modal').classList.add('active');
 }
+
+// Экспорт функций в window для доступности из HTML
+window.selectGrade = selectGrade;
+window.setTeamCount = setTeamCount;
+window.startGame = startGame;
+window.resetToSetup = resetToSetup;
+window.openQuestion = openQuestion;
+window.revealAnswer = revealAnswer;
+window.awardPoints = awardPoints;
+window.addCustomPoints = addCustomPoints;
+window.closeModal = closeModal;
+window.finishGame = finishGame;
+
+// Навешивание слушателей событий после загрузки документа
+document.addEventListener('DOMContentLoaded', () => {
+    // Выбор класса
+    const gradeGroup = document.getElementById('grade-buttons-group');
+    if (gradeGroup) {
+        gradeGroup.addEventListener('click', (e) => {
+            const btn = e.target.closest('.grade-btn');
+            if (btn) selectGrade(btn.dataset.grade, btn);
+        });
+    }
+
+    // Выбор количества команд
+    const countGroup = document.getElementById('team-count-group');
+    if (countGroup) {
+        countGroup.addEventListener('click', (e) => {
+            const btn = e.target.closest('.count-btn');
+            if (btn) setTeamCount(btn.dataset.count, btn);
+        });
+    }
+
+    // Основные кнопки
+    const btnStart = document.getElementById('btn-start-game');
+    if (btnStart) btnStart.addEventListener('click', startGame);
+
+    const btnReset = document.getElementById('btn-reset-setup');
+    if (btnReset) btnReset.addEventListener('click', resetToSetup);
+
+    const btnRestart = document.getElementById('btn-restart-game');
+    if (btnRestart) btnRestart.addEventListener('click', resetToSetup);
+
+    const btnFinish = document.getElementById('btn-finish-game');
+    if (btnFinish) btnFinish.addEventListener('click', finishGame);
+
+    const btnShowAns = document.getElementById('btn-show-ans');
+    if (btnShowAns) btnShowAns.addEventListener('click', revealAnswer);
+
+    // Первичная отрисовка полей ввода
+    renderTeamInputs();
+});
