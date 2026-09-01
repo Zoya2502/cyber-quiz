@@ -9,66 +9,66 @@
 </head>
 <body>
 
-    <!-- Стартовый экран выбора класса -->
-    <div id="grade-modal" class="modal active">
-        <div class="modal-content grade-select-box">
+    <!-- Стартовое окно настройки игры -->
+    <div id="setup-modal" class="modal active">
+        <div class="modal-content setup-box">
             <h1 class="glow-title">КИБЕР-КВИЗ</h1>
-            <p class="subtitle">Выберите класс для запуска викторины:</p>
-            <div class="grade-buttons">
-                <button class="btn grade-btn" onclick="startQuiz('6')">6 КЛАСС</button>
-                <button class="btn grade-btn" onclick="startQuiz('7')">7 КЛАСС</button>
-                <button class="btn grade-btn" onclick="startQuiz('8')">8 КЛАСС</button>
+            <p class="subtitle">Настройка параметров битвы</p>
+
+            <!-- 1. Выбор класса -->
+            <div class="setup-section">
+                <label class="setup-label">1. Выберите класс:</label>
+                <div class="grade-buttons">
+                    <button type="button" class="btn grade-btn active" onclick="selectGrade('6', this)">6 класс</button>
+                    <button type="button" class="btn grade-btn" onclick="selectGrade('7', this)">7 класс</button>
+                    <button type="button" class="btn grade-btn" onclick="selectGrade('8', this)">8 класс</button>
+                </div>
             </div>
+
+            <!-- 2. Выбор количества команд -->
+            <div class="setup-section">
+                <label class="setup-label">2. Количество команд:</label>
+                <div class="team-count-buttons">
+                    <button type="button" class="btn count-btn active" onclick="setTeamCount(2, this)">2 команды</button>
+                    <button type="button" class="btn count-btn" onclick="setTeamCount(3, this)">3 команды</button>
+                    <button type="button" class="btn count-btn" onclick="setTeamCount(4, this)">4 команды</button>
+                </div>
+            </div>
+
+            <!-- 3. Названия команд -->
+            <div class="setup-section">
+                <label class="setup-label">3. Названия команд:</label>
+                <div class="team-names-inputs" id="team-inputs-container">
+                    <!-- Поля генерируются через JS -->
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-start" onclick="startGame()">ПОЕХАЛИ! 🚀</button>
         </div>
     </div>
 
-    <!-- Основной интерфейс игры -->
+    <!-- Основной игровой экран -->
     <div class="container" id="game-container" style="display: none;">
         
-        <!-- Верхняя панель управления и счет -->
         <header class="header">
             <div class="header-left">
                 <span class="active-grade-badge" id="current-grade-badge">6 класс</span>
-                <button class="btn btn-sm btn-secondary" onclick="resetToGradeSelection()">Сменить класс</button>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="resetToSetup()">⚙️ Новая игра</button>
             </div>
 
-            <div class="score-board">
-                <!-- Команда 1 -->
-                <div class="team-card" id="team1-card">
-                    <div class="team-name">Команда 1</div>
-                    <div class="team-score" id="score-team1">0</div>
-                    <div class="bonus-controls">
-                        <button class="btn-bonus" onclick="addCustomPoints(1, 5)">+5</button>
-                        <button class="btn-bonus" onclick="addCustomPoints(1, 10)">+10</button>
-                        <button class="btn-bonus penalty" onclick="addCustomPoints(1, -5)">-5</button>
-                    </div>
-                </div>
-
-                <div class="vs-divider">VS</div>
-
-                <!-- Команда 2 -->
-                <div class="team-card" id="team2-card">
-                    <div class="team-name">Команда 2</div>
-                    <div class="team-score" id="score-team2">0</div>
-                    <div class="bonus-controls">
-                        <button class="btn-bonus" onclick="addCustomPoints(2, 5)">+5</button>
-                        <button class="btn-bonus" onclick="addCustomPoints(2, 10)">+10</button>
-                        <button class="btn-bonus penalty" onclick="addCustomPoints(2, -5)">-5</button>
-                    </div>
-                </div>
-            </div>
+            <!-- Динамическое табло команд -->
+            <div class="score-board" id="score-board"></div>
         </header>
 
-        <!-- Игровое поле: Категории и карточки с баллами -->
+        <!-- Сетка вопросов -->
         <main class="grid-board" id="board"></main>
 
-        <!-- Кнопка завершения игры -->
         <footer class="footer">
-            <button class="btn btn-finish" onclick="finishGame()">Завершить игру и подвести итог</button>
+            <button type="button" class="btn btn-finish" onclick="finishGame()">Завершить игру и подвести итог</button>
         </footer>
     </div>
 
-    <!-- Модальное окно вопроса -->
+    <!-- Окно вопроса -->
     <div id="question-modal" class="modal">
         <div class="modal-content question-box">
             <div class="modal-header">
@@ -78,47 +78,35 @@
             
             <div class="question-text" id="modal-question-text">Текст вопроса...</div>
 
-            <!-- Варианты ответов -->
             <div class="options-container" id="modal-options"></div>
 
-            <!-- Блок показа ответа -->
             <div class="answer-reveal" id="answer-reveal" style="display: none;">
                 <div class="answer-title">Правильный ответ:</div>
                 <div class="answer-text" id="correct-answer-text"></div>
             </div>
 
-            <!-- Кнопки управления и начисления баллов -->
             <div class="modal-actions">
-                <button class="btn btn-show" id="btn-show-ans" onclick="revealAnswer()">Показать ответ</button>
+                <button type="button" class="btn btn-show" id="btn-show-ans" onclick="revealAnswer()">Показать ответ</button>
                 
-                <div class="award-buttons" id="award-controls" style="display: none;">
-                    <span>Начислить очки:</span>
-                    <button class="btn btn-award team1" onclick="awardPoints(1)">Команде 1</button>
-                    <button class="btn btn-award team2" onclick="awardPoints(2)">Команде 2</button>
-                    <button class="btn btn-close" onclick="closeModal(false)">Никому</button>
+                <div class="award-controls" id="award-controls" style="display: none;">
+                    <div class="award-label">Кому начислить очки?</div>
+                    <div class="award-buttons-list" id="award-buttons-list">
+                        <!-- Кнопки команд генерируются в JS -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно результатов -->
+    <!-- Окно финальных результатов -->
     <div id="result-modal" class="modal">
         <div class="modal-content result-box">
             <h2 class="glow-title">Итоги битвы</h2>
-            <div class="winner-declaration" id="winner-text">Команда 1 побеждает!</div>
+            <div class="winner-declaration" id="winner-text"></div>
             
-            <div class="final-scores">
-                <div class="final-score-item">
-                    <span>Команда 1:</span>
-                    <strong id="final-team1">0</strong>
-                </div>
-                <div class="final-score-item">
-                    <span>Команда 2:</span>
-                    <strong id="final-team2">0</strong>
-                </div>
-            </div>
+            <div class="final-scores-list" id="final-scores-list"></div>
 
-            <button class="btn btn-finish" onclick="resetToGradeSelection()">Новая игра</button>
+            <button type="button" class="btn btn-finish" onclick="resetToSetup()">Новая игра</button>
         </div>
     </div>
 
