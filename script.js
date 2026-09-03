@@ -561,6 +561,8 @@ function openQuestion(categoryName, questionObj, cardElement) {
     document.getElementById('question-modal').classList.add('active');
 }
 
+
+// Показ ответа и кнопок начисления
 function revealAnswer() {
     document.getElementById('answer-reveal').style.display = 'block';
     document.getElementById('btn-show-ans').style.display = 'none';
@@ -578,24 +580,42 @@ function revealAnswer() {
         awardList.appendChild(btn);
     });
 
+    // Кнопка "Никому" — передаем статус 'unanswered'
     const btnNone = document.createElement('button');
     btnNone.type = 'button';
     btnNone.className = 'btn btn-close';
     btnNone.innerText = 'Никому';
-    btnNone.onclick = () => closeModal(false);
+    btnNone.onclick = () => closeModal('unanswered');
     awardList.appendChild(btnNone);
 
     document.getElementById('award-controls').style.display = 'flex';
 }
 
+// Начисление основных баллов команде
 function awardPoints(teamId) {
     const team = teams.find(t => t.id === teamId);
     if (team) {
         team.score += currentPoints;
         updateScoresUI();
     }
-    closeModal(true);
+    closeModal('answered');
 }
+
+// Закрытие карточки с нужным статусом
+function closeModal(status) {
+    if (currentActiveCard) {
+        if (status === 'answered') {
+            // Если балл получен: обычное выключение карточки
+            currentActiveCard.classList.add('disabled');
+        } else if (status === 'unanswered') {
+            // Если "Никому": подсвечиваем красным и блокируем клик
+            currentActiveCard.classList.add('unanswered');
+        }
+    }
+    document.getElementById('question-modal').classList.remove('active');
+}
+
+
 
 function addCustomPoints(teamId, points) {
     const team = teams.find(t => t.id === teamId);
@@ -606,12 +626,7 @@ function addCustomPoints(teamId, points) {
     }
 }
 
-function closeModal(markAsDisabled) {
-    if (markAsDisabled && currentActiveCard) {
-        currentActiveCard.classList.add('disabled');
-    }
-    document.getElementById('question-modal').classList.remove('active');
-}
+
 
 function updateScoresUI() {
     teams.forEach(t => {
